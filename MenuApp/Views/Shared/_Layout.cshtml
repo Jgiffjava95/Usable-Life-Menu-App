@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html ng-app="MenuApp">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Usable Burger</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+
+<body class="backgroundimg">
+
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Usable Burger</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-route.min.js"></script>
+    <script src="~/app/app.js"></script>
+    <script src="~/app/shared/dataService.js"></script>
+    <script src="~/app/controllers/orderController.js"></script>
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
