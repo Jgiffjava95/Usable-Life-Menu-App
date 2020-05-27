@@ -19,13 +19,22 @@
         .controller('orderAddCtrl', ['$scope', '$location', 'dataService', function ($scope, $location, dataService) {
 
             $scope.itemOrderList = [];
+            $scope.totalItemPrices = 0;
 
             $scope.addOrderToList = function (item) {
                 console.log(item);
-                $scope.itemOrderList.push(item);
+                $scope.addPricesToTotalItemPrices(item.itemPrice);
+                $scope.itemOrderList.push(item.itemName);
             };
 
+            $scope.addPricesToTotalItemPrices = function (price) {
+                console.log(price);
+                $scope.totalItemPrices += price ;
+            };
+
+
             $scope.removeFromOrderToList = function (index) {
+                console.log(index);
                 $scope.itemOrderList.splice(index, 1);
             };
 

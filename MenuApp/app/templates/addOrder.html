@@ -5,7 +5,7 @@
         <div class="card col-8">
             <h2>Food Items</h2>
             <div class="row">
-                <button class="btn btn-success col-3" ng-repeat="i in Items" ng-click="addOrderToList(i.itemName)">{{i.itemName}}</button>
+                <button class="btn btn-success col-3" ng-repeat="i in Items" ng-click="addOrderToList(i)">{{i.itemName}}</button>
             </div>
         </div>
 
@@ -37,7 +37,7 @@
             </div>
 
             <div>
-                {{order.orderPrice}}
+                {{totalItemPrices}}
             </div>
         </div>
     </div>
