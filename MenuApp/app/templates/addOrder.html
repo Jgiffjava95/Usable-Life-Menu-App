@@ -1,44 +1,44 @@
 ﻿<form class="form-horizontal" ng-init="getItems()">
-    <h4>Create Order</h4>
-
     <div class="row">
-        <div class="card col-8">
-            <h2>Food Items</h2>
-            <div class="row">
-                <button class="btn btn-success col-3" ng-repeat="i in Items" ng-click="addOrderToList(i)">{{i.itemName}}</button>
-            </div>
-        </div>
-
-        <div class="col-4">
+        <div class="col-6">
             <div class="form-group">
                 <div>
                     <input ng-click="createOrder(order)" class="btn  btn-success" value="Create" />
-                    <a href="#/" class="btn  btn-success">Cancel</a>
+                    <a href="#/" class="btn  btn-success">Back</a>
                 </div>
             </div>
         </div>
 
-        <div class="col-4">
+        <div class="col-6">
             <div class="form-group">
                 <label class="control-label">Customer Name</label>
                 <div class="col-lg-10">
                     <input type="text" class="form-control" ng-model="order.customerName" />
                 </div>
             </div>
-
-            <div class="col-4">
-                <h2>Order Items</h2>
-                <ul>
-                    <li ng-repeat="i in itemOrderList track by $index">
-                        <p>{{i}}/<p>
-                            <button ng-click="removeFromOrderToList($index)">Remove</button>
-                    </li>
-                </ul>
-            </div>
-
-            <div>
-                {{totalItemPrices}}
-            </div>
         </div>
+    </div>
+
+    <div>
+        <h1>Total Price: ${{totalItemPrices}}</h1>
+    </div>
+
+    <div class="">
+        <h2>Food Items</h2>
+        <div class="row">
+            <button class="btn btn-success col-3" ng-repeat="item in Items" ng-click="addOrderToList(item)">{{item.itemName}}</button>
+        </div>
+    </div>
+
+
+    <div class="">
+        <h2>Order Items</h2>
+        <ul>
+            <li ng-repeat="i in itemOrderList">
+                <p>{{i.itemName}}{{i.itemPrice}}
+                    <button ng-click="removeFromOrderToList(i)">Remove</button>
+            </li>
+        </ul>
+    </div>
     </div>
 </form>

@@ -22,23 +22,33 @@
             $scope.totalItemPrices = 0;
 
             $scope.addOrderToList = function (item) {
-                console.log(item);
+                //console.log(item.itemName);
                 $scope.addPricesToTotalItemPrices(item.itemPrice);
-                $scope.itemOrderList.push(item.itemName);
+                $scope.itemOrderList.push({ 'itemName': item.itemName, 'itemPrice': item.itemPrice });
             };
 
             $scope.addPricesToTotalItemPrices = function (price) {
-                console.log(price);
+                //console.log(price);
                 $scope.totalItemPrices += price ;
             };
 
+            $scope.removePricesFromTotalItemPrices = function (price) {
+                $scope.totalItemPrices -= price;
+            };
 
-            $scope.removeFromOrderToList = function (index) {
-                console.log(index);
-                $scope.itemOrderList.splice(index, 1);
+
+            $scope.removeFromOrderToList = function (item) {
+                $scope.removePricesFromTotalItemPrices(item.itemPrice);
+                $scope.itemOrderList.splice(item, 1); //FIX THIS
             };
 
             $scope.createOrder = function (order) {
+                //loop through and get only item names to be turned to string
+                var myJson = JSON.stringify($scope.itemOrderList.itemName);
+                //console.log(myJson);
+                //console.log($scope.totalItemPrices);
+                order.orderPrice = $scope.totalItemPrices;
+                order.orderItems = myJson;
                 dataService.addOrder(order).then(function () {
                     $location.path('/');
                 });

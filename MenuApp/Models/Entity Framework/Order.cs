@@ -19,11 +19,12 @@ namespace MenuApp.Models
         public string customerName { get; set; }
 
         [Required]
-        //   public List<Item> orderItems { get; set; }
+       // public List<itemFromJson> orderItems { get; set; }
 
         public string orderItems { get; set; }
-        public int orderPrice { get; set; }
+        public double orderPrice { get; set; }
         public DateTime timeOfOrder { get; set; }
 
     }
+
 }

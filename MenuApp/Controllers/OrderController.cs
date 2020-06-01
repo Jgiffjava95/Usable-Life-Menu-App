@@ -1,4 +1,5 @@
 ﻿using MenuApp.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,7 @@ namespace MenuApp.Controllers
         [HttpPost]
         public JsonResult Create(Order order)
         {
+            //order.orderItems = JsonConvert.DeserializeObject<string>(order);
             db.Orders.Add(order);
             db.SaveChanges();
             return Json(null);

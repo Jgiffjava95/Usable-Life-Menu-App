@@ -15,4 +15,9 @@ namespace MenuApp.Models
 
     }
 
+  /*  public class itemFromJson
+    {
+        public string itemName { get;  set; }
+    }
+    */
 }
