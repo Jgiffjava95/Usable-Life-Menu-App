@@ -18,17 +18,15 @@
 
         .controller('orderAddCtrl', ['$scope', '$location', 'dataService', function ($scope, $location, dataService) {
 
-            $scope.itemOrderList = [];
+            $scope.chosenItems = [];
             $scope.totalItemPrices = 0;
 
             $scope.addOrderToList = function (item) {
-                //console.log(item.itemName);
                 $scope.addPricesToTotalItemPrices(item.itemPrice);
-                $scope.itemOrderList.push({ 'itemName': item.itemName, 'itemPrice': item.itemPrice });
+                $scope.chosenItems.push({'Name': item.itemName, 'Price': item.itemPrice});
             };
 
             $scope.addPricesToTotalItemPrices = function (price) {
-                //console.log(price);
                 $scope.totalItemPrices += price ;
             };
 
@@ -38,15 +36,18 @@
 
 
             $scope.removeFromOrderToList = function (item) {
-                $scope.removePricesFromTotalItemPrices(item.itemPrice);
-                $scope.itemOrderList.splice(item, 1); //FIX THIS
+                $scope.removePricesFromTotalItemPrices(item.Price);
+                $scope.chosenItems.splice(item, 1); //FIX THIS
             };
 
             $scope.createOrder = function (order) {
-                //loop through and get only item names to be turned to string
-                var myJson = JSON.stringify($scope.itemOrderList.itemName);
-                //console.log(myJson);
-                //console.log($scope.totalItemPrices);
+                var itemList = [];
+                for (var i = 0; i < $scope.chosenItems.length;) {
+                    console.log($scope.chosenItems[i].Name);
+                    itemList.push($scope.chosenItems[i].Name);
+                    i++;
+                }
+                var myJson = JSON.stringify(itemList);
                 order.orderPrice = $scope.totalItemPrices;
                 order.orderItems = myJson;
                 dataService.addOrder(order).then(function () {

@@ -19,26 +19,35 @@
         </div>
     </div>
 
-    <div>
-        <h1>Total Price: ${{totalItemPrices}}</h1>
-    </div>
-
-    <div class="">
-        <h2>Food Items</h2>
-        <div class="row">
-            <button class="btn btn-success col-3" ng-repeat="item in Items" ng-click="addOrderToList(item)">{{item.itemName}}</button>
+    <div class="row">
+        <div class="col-6">
+            <h2>Food Items</h2>
+            <div class="row">
+                <button class="btn btn-success col-3" ng-repeat="item in Items" ng-click="addOrderToList(item)">{{item.itemName}}</button>
+            </div>
         </div>
-    </div>
 
-
-    <div class="">
-        <h2>Order Items</h2>
-        <ul>
-            <li ng-repeat="i in itemOrderList">
-                <p>{{i.itemName}}{{i.itemPrice}}
-                    <button ng-click="removeFromOrderToList(i)">Remove</button>
-            </li>
-        </ul>
-    </div>
+        <div class="col-6">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Item Price</th>
+                        <th>Total Price: ${{totalItemPrices}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="i in chosenItems">
+                        <td>{{i.Name}}</td>
+                        <td>{{i.Price}}</td>
+                        <td>
+                            <button class="btn btn-danger" ng-click="removeFromOrderToList(i)">
+                                Remove
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </form>
