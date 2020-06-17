@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MenuApp.Models.Entity_Framework;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
@@ -24,6 +25,7 @@ namespace MenuApp.Models
         
         public DbSet<Order> Orders { get; set; }
         public DbSet<Item> Items { get; set; }
-       // public DbSet<itemFromJson> itemFromJson { get; set; }
+        public DbSet<User> User { get; set; }
+        // public DbSet<itemFromJson> itemFromJson { get; set; }
     }
 }

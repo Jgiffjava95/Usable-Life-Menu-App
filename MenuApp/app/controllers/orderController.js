@@ -20,10 +20,14 @@
 
             $scope.chosenItems = [];
             $scope.totalItemPrices = 0;
+            $scope.id = 0;
+
+            $scope.userId = "";
 
             $scope.addOrderToList = function (item) {
                 $scope.addPricesToTotalItemPrices(item.itemPrice);
-                $scope.chosenItems.push({'Name': item.itemName, 'Price': item.itemPrice});
+                $scope.chosenItems.push({ 'Name': item.itemName, 'Price': item.itemPrice, 'id': $scope.id });
+                $scope.id += 1;
             };
 
             $scope.addPricesToTotalItemPrices = function (price) {
@@ -37,7 +41,15 @@
 
             $scope.removeFromOrderToList = function (item) {
                 $scope.removePricesFromTotalItemPrices(item.Price);
-                $scope.chosenItems.splice(item, 1); //FIX THIS
+                for (var i = 0; i < $scope.chosenItems.length;) {
+                    if (item.id == $scope.chosenItems[i].id) {
+                        console.log($scope.chosenItems[i].Name + " " + $scope.chosenItems[i].Price);
+                        $scope.chosenItems.splice(i, 1);
+                        i = 0;
+                        break;
+                    }
+                    i++;
+                }
             };
 
             $scope.createOrder = function (order) {
@@ -61,7 +73,14 @@
                 dataService.getItems().then(function (result) {
                     $scope.Items = result;
                 });
-            }
+            };
+
+            $scope.loginUser = function () {
+                console.log($scope.userId);
+                dataService.getUserById($scope.userId).then(function (result) {
+                    $scope.Items = result;
+                });
+            };
         }]);
 
 })();

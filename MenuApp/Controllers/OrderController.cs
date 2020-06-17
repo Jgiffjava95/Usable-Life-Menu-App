@@ -28,6 +28,13 @@ namespace MenuApp.Controllers
             return Json(items, JsonRequestBehavior.AllowGet);
 
         }
+
+        public JsonResult GetUser(int userId)
+        {
+            var loggedInUser = db.User.Find(userId);
+            return Json(loggedInUser, JsonRequestBehavior.AllowGet);
+
+        }
         [HttpPost]
         public JsonResult Create(Order order)
         {

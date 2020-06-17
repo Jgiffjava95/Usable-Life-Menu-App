@@ -26,6 +26,16 @@
                 return deferred.promise;
             };
 
+            service.getUserById = function (userId) {
+                var deferred = $q.defer();
+                $http.get('/Order/GetUser/', userId).then(function (result) {
+                    deferred.resolve(result.data);
+                }, function () {
+                    deferred.reject();
+                });
+                return deferred.promise;
+            };
+
             service.addOrder = function (order) {
                 //console.log(order.customerName);
                 //console.log(order.orderPrice);

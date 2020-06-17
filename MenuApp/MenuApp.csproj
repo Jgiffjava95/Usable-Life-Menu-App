@@ -142,6 +142,7 @@
     <Compile Include="Models\Entity Framework\Order.cs" />
     <Compile Include="Models\Entity Framework\DBC.cs" />
     <Compile Include="Models\Entity Framework\Item.cs" />
+    <Compile Include="Models\Entity Framework\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
