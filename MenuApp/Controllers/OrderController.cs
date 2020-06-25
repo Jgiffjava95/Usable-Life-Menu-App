@@ -29,6 +29,13 @@ namespace MenuApp.Controllers
 
         }
 
+        public JsonResult GetDiscounts()
+        {
+            var Discount = db.Discount.ToList();
+            return Json(Discount, JsonRequestBehavior.AllowGet);
+
+        }
+
         public JsonResult GetUser(int userId)
         {
             var loggedInUser = db.User.Find(userId);

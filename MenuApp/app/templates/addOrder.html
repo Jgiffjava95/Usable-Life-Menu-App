@@ -1,4 +1,4 @@
-﻿<form class="form-horizontal" ng-init="getItems()">
+﻿<form class="form-horizontal" ng-init="getEverything()">
     <div class="row">
         <div class="col-6">
             <div class="form-group">
@@ -16,8 +16,17 @@
                     <input type="text" class="form-control" ng-model="order.customerName" />
                 </div>
             </div>
+
+            <div class="form-group">
+                <label class="control-label">Discount</label>
+                <select>
+                    <option ng-repeat="i in Discounts" ng-model="selectedDiscount">
+                        {{i.discountName}} -{{i.discountAmount}}%
+                    </option>
+                </select>
+            </div>
         </div>
-    </div>
+        </div>
 
     <div class="row">
         <div class="col-6">

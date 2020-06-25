@@ -26,6 +26,16 @@
                 return deferred.promise;
             };
 
+            service.getDiscounts = function () {
+                var deferred = $q.defer();
+                $http.get('/Order/GetDiscounts').then(function (result) {
+                    deferred.resolve(result.data);
+                }, function () {
+                    deferred.reject();
+                });
+                return deferred.promise;
+            };
+
             service.getUserById = function (userId) {
                 var deferred = $q.defer();
                 $http.get('/Order/GetUser/', userId).then(function (result) {

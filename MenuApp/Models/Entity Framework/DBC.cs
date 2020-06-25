@@ -26,6 +26,7 @@ namespace MenuApp.Models
         public DbSet<Order> Orders { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<User> User { get; set; }
+        public DbSet<Discount> Discount { get; set; }
         // public DbSet<itemFromJson> itemFromJson { get; set; }
     }
 }

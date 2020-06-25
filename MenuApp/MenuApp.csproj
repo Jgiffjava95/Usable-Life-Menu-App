@@ -139,6 +139,7 @@
       <DependentUpon>202005250635051_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Entity Framework\Discount.cs" />
     <Compile Include="Models\Entity Framework\Order.cs" />
     <Compile Include="Models\Entity Framework\DBC.cs" />
     <Compile Include="Models\Entity Framework\Item.cs" />

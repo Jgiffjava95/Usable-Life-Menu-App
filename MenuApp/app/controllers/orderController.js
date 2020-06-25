@@ -22,6 +22,8 @@
             $scope.totalItemPrices = 0;
             $scope.id = 0;
 
+            $scope.selectedDiscount = "";
+
             $scope.userId = "";
 
             $scope.addOrderToList = function (item) {
@@ -67,11 +69,21 @@
                 });
             };
 
-            getItems();
+            getEverything();
+            function getEverything() {
+                getItems();
+                getDiscounts();
+            }
 
             function getItems() {
                 dataService.getItems().then(function (result) {
                     $scope.Items = result;
+                });
+            };
+
+            function getDiscounts() {
+                dataService.getDiscounts().then(function (result) {
+                    $scope.Discounts = result;
                 });
             };
 

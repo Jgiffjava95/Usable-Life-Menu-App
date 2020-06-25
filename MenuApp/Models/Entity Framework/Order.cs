@@ -25,7 +25,7 @@ namespace MenuApp.Models
         public double orderPrice { get; set; }
         public DateTime timeOfOrder { get; set; }
 
-        public string employeeThatTookOrder { get; set; }
+     //   public string employeeThatTookOrder { get; set; }
 
     }
 
