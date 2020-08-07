@@ -19,12 +19,13 @@
         .controller('orderAddCtrl', ['$scope', '$location', 'dataService', function ($scope, $location, dataService) {
 
             $scope.chosenItems = [];
+            $scope.calcPriceBeforeDiscount = 0;
+            $scope.selectedDiscount = "";
+            $scope.finalPrice = 0;
             $scope.totalItemPrices = 0;
             $scope.id = 0;
-
-            $scope.selectedDiscount = "";
-
             $scope.userId = "";
+            $scope.orderSavings = 0;
 
             $scope.addOrderToList = function (item) {
                 $scope.addPricesToTotalItemPrices(item.itemPrice);
@@ -33,13 +34,28 @@
             };
 
             $scope.addPricesToTotalItemPrices = function (price) {
-                $scope.totalItemPrices += price ;
+                $scope.calcPriceBeforeDiscount += price;
+                $scope.calculateFinalPrice($scope.calcPriceBeforeDiscount);
             };
 
             $scope.removePricesFromTotalItemPrices = function (price) {
-                $scope.totalItemPrices -= price;
+                $scope.calcPriceBeforeDiscount -= price;
+                $scope.calculateFinalPrice($scope.calcPriceBeforeDiscount);
             };
 
+            $scope.calculateFinalPrice = function (total) {
+                if ($scope.selectedDiscount == "") {
+                    $scope.selectedDiscount = { 'discountAmount': 0 };
+                }
+                var calcPrice = (total * $scope.selectedDiscount.discountAmount) / 100; //issue is here 
+                $scope.finalPrice = total - calcPrice;
+                $scope.orderSavings = calcPrice;
+
+                console.log($scope.selectedDiscount);
+                console.log(calcPrice);
+                console.log($scope.calcPriceBeforeDiscount);
+                console.log($scope.finalPrice);
+            };
 
             $scope.removeFromOrderToList = function (item) {
                 $scope.removePricesFromTotalItemPrices(item.Price);
@@ -55,6 +71,7 @@
             };
 
             $scope.createOrder = function (order) {
+                console.log($scope.selectedDiscount.discountAmount);
                 var itemList = [];
                 for (var i = 0; i < $scope.chosenItems.length;) {
                     console.log($scope.chosenItems[i].Name);
@@ -62,7 +79,8 @@
                     i++;
                 }
                 var myJson = JSON.stringify(itemList);
-                order.orderPrice = $scope.totalItemPrices;
+
+                order.orderPrice = $scope.finalPrice;  //look at toFixed(2)
                 order.orderItems = myJson;
                 dataService.addOrder(order).then(function () {
                     $location.path('/');

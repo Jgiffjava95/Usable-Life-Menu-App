@@ -19,11 +19,10 @@
 
             <div class="form-group">
                 <label class="control-label">Discount</label>
-                <select>
-                    <option ng-repeat="i in Discounts" ng-model="selectedDiscount">
-                        {{i.discountName}} -{{i.discountAmount}}%
-                    </option>
-                </select>
+
+                    <select ng-model="selectedDiscount" ng-options=" i.discountName for i in Discounts">
+                    </select>
+
             </div>
         </div>
         </div>
@@ -42,7 +41,7 @@
                     <tr>
                         <th>Item Name</th>
                         <th>Item Price</th>
-                        <th>Total Price: {{totalItemPrices | currency}}</th>
+                        <th>Total Price: {{finalPrice | currency}} <br /> Total Savings: {{orderSavings | currency}}  </th>
                     </tr>
                 </thead>
                 <tbody>
