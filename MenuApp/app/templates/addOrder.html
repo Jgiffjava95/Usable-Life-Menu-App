@@ -20,7 +20,7 @@
             <div class="form-group">
                 <label class="control-label">Discount</label>
 
-                    <select ng-model="selectedDiscount" ng-options=" i.discountName for i in Discounts">
+                    <select ng-model="selectedDiscount" ng-options=" i.discountName for i in Discounts" ng-change="updatePriceAfterDiscountApplied()">
                     </select>
 
             </div>
@@ -41,7 +41,7 @@
                     <tr>
                         <th>Item Name</th>
                         <th>Item Price</th>
-                        <th>Total Price: {{finalPrice | currency}} <br /> Total Savings: {{orderSavings | currency}}  </th>
+                        <th>Tax: {{taxAmountForCurrentOrder | currency}} <br /> Total Price: {{finalPrice | currency}} <br /> Total Savings: {{orderSavings | currency}}  </th>
                     </tr>
                 </thead>
                 <tbody>

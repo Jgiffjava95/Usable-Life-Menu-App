@@ -26,6 +26,8 @@
             $scope.id = 0;
             $scope.userId = "";
             $scope.orderSavings = 0;
+            $scope.arkansasSalesTaxAmount = 6.5;
+            $scope.taxAmountForCurrentOrder = 0;
 
             $scope.addOrderToList = function (item) {
                 $scope.addPricesToTotalItemPrices(item.itemPrice);
@@ -47,15 +49,21 @@
                 if ($scope.selectedDiscount == "") {
                     $scope.selectedDiscount = { 'discountAmount': 0 };
                 }
-                var calcPrice = (total * $scope.selectedDiscount.discountAmount) / 100; //issue is here 
-                $scope.finalPrice = total - calcPrice;
-                $scope.orderSavings = calcPrice;
+                var calcDiscountPrice = (total * $scope.selectedDiscount.discountAmount) / 100;
+                var finalBeforeTaxAdded = total - calcDiscountPrice;
 
-                console.log($scope.selectedDiscount);
-                console.log(calcPrice);
-                console.log($scope.calcPriceBeforeDiscount);
-                console.log($scope.finalPrice);
+                var calcSalesTax = (finalBeforeTaxAdded * $scope.arkansasSalesTaxAmount) / 100;
+
+                $scope.orderSavings = calcDiscountPrice;
+
+                $scope.taxAmountForCurrentOrder = calcSalesTax;
+
+                $scope.finalPrice = total - calcDiscountPrice + $scope.taxAmountForCurrentOrder;
             };
+
+            $scope.updatePriceAfterDiscountApplied = function () {
+                $scope.calculateFinalPrice($scope.calcPriceBeforeDiscount);
+            }
 
             $scope.removeFromOrderToList = function (item) {
                 $scope.removePricesFromTotalItemPrices(item.Price);
@@ -80,7 +88,7 @@
                 }
                 var myJson = JSON.stringify(itemList);
 
-                order.orderPrice = $scope.finalPrice;  //look at toFixed(2)
+                order.orderPrice = $scope.finalPrice.toFixed(2);  //look at toFixed(2)
                 order.orderItems = myJson;
                 dataService.addOrder(order).then(function () {
                     $location.path('/');
