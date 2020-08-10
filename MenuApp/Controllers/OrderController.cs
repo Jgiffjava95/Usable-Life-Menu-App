@@ -45,6 +45,8 @@ namespace MenuApp.Controllers
         [HttpPost]
         public JsonResult Create(Order order)
         {
+
+            order.timeOfOrder = DateTime.Now;
             //order.orderItems = JsonConvert.DeserializeObject<string>(order);
             db.Orders.Add(order);
             db.SaveChanges();

@@ -47,9 +47,6 @@
             };
 
             service.addOrder = function (order) {
-                //console.log(order.customerName);
-                //console.log(order.orderPrice);
-                //console.log(order.orderItems);
                 var deferred = $q.defer();
                 $http.post('/Order/Create', order).then(function () {
                     deferred.resolve();

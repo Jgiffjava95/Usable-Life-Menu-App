@@ -23,10 +23,10 @@
                         {{i.customerName}}
                     </td>
                     <td>
-                        {{i.orderPrice}}
+                        {{i.orderPrice | currency}}
                     </td>
                     <td>
-                        {{i.timeOfOrder}}
+                        {{i.timeOfOrder | date : "short"}}
                     </td>
                 </tr>
                 <tr ng-if="!orders || orders.length == 0">

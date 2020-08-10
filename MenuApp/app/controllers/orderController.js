@@ -8,12 +8,35 @@
 
             getData();
 
+
+
+
             function getData() {
                 dataService.getOrders().then(function (result) {
                     $scope.orders = result;
 
-                });
-            }
+                    var formatedDate = formatJsonDate($scope.orders);
+
+                    for (var i = 0; i < $scope.orders.length; i++) {
+                        for (var i = 0; i < formatedDate.length; i++) {
+                            $scope.orders[i].timeOfOrder = formatedDate[i].timeOfOrder;
+                        }
+                    }
+                   
+                })
+
+            };
+
+            function formatJsonDate(orders) {
+
+                for (var i = 0; i < orders.length;) {
+                    var date = new Date(parseInt(orders[i].timeOfOrder.substr(6)));
+                    orders[i].timeOfOrder = date;
+                    i++;
+                }
+                return orders;
+            };
+
         }])
 
         .controller('orderAddCtrl', ['$scope', '$location', 'dataService', function ($scope, $location, dataService) {
@@ -88,8 +111,9 @@
                 }
                 var myJson = JSON.stringify(itemList);
 
-                order.orderPrice = $scope.finalPrice.toFixed(2);  //look at toFixed(2)
+                order.orderPrice = $scope.finalPrice.toFixed(2);
                 order.orderItems = myJson;
+                console.log(order.timeOfOrder);
                 dataService.addOrder(order).then(function () {
                     $location.path('/');
                 });
