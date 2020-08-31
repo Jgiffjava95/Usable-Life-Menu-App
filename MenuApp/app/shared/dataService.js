@@ -15,7 +15,7 @@
                 });
                 return deferred.promise;
             };
-
+/*
             service.getItems = function () {
                 var deferred = $q.defer();
                 $http.get('/Order/GetItems').then(function (result) {
@@ -25,6 +25,7 @@
                 });
                 return deferred.promise;
             };
+            */
 
             service.getDiscounts = function () {
                 var deferred = $q.defer();
@@ -35,17 +36,7 @@
                 });
                 return deferred.promise;
             };
-
-            service.getUserById = function (userId) {
-                var deferred = $q.defer();
-                $http.get('/Order/GetUser/', userId).then(function (result) {
-                    deferred.resolve(result.data);
-                }, function () {
-                    deferred.reject();
-                });
-                return deferred.promise;
-            };
-
+/*
             service.addOrder = function (order) {
                 var deferred = $q.defer();
                 $http.post('/Order/Create', order).then(function () {
@@ -55,27 +46,7 @@
                 });
                 return deferred.promise;
             };
-
-            service.editOrder = function (order) {
-                var deferred = $q.defer();
-                $http.put('/Order/Edit', order).then(function () {
-                    deferred.resolve(result.data);
-                }, function () {
-                    deferred.reject();
-                });
-                return deferred.promise;
-            };
-
-            service.editOrder = function (order) {
-                var deferred = $q.defer();
-                $http.delete('/Order/Delete', { id: id }).then(function () {
-                    deferred.resolve(result.data);
-                }, function () {
-                    deferred.reject();
-                });
-                return deferred.promise;
-            };
-
+*/
             return service;
         }]);
 })();

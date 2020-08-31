@@ -15,7 +15,6 @@ namespace MenuApp.Models
         public int orderId { get; set; }
 
         [Required]
-        [MaxLength(32)]
         public string customerName { get; set; }
 
         [Required]

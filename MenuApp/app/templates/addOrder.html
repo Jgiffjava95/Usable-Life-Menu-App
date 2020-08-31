@@ -1,10 +1,14 @@
-﻿<form class="form-horizontal" ng-init="getEverything()">
+﻿<form class="form-horizontal" name="addOrderForm" ng-init="getEverything()">
     <div class="row">
         <div class="col-6">
             <div class="form-group">
                 <div>
-                    <input ng-click="createOrder(order)" class="btn  btn-success" value="Create" />
-                    <a href="#/" class="btn btn-success">Back</a>
+                    <input ng-click="createOrder(order)" class="btn  btn-success" value="Create" ng-disabled="!addOrderForm.$valid || successfulInsert" />
+                    <a href="#/" class="btn btn-success">Back</a> </br>
+                    <span class="text-success"
+                          ng-show="!addOrderForm.$valid || successfulInsert">
+                        {{postSuccess}}
+                    </span>
                 </div>
             </div>
         </div>
@@ -13,14 +17,14 @@
             <div class="form-group">
                 <label class="control-label">Customer Name</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" ng-model="order.customerName" />
+                    <input type="text" class="form-control" ng-model="order.customerName" ng-disabled="!addOrderForm.$valid || successfulInsert" />
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label">Discount</label>
 
-                    <select ng-model="selectedDiscount" ng-options=" i.discountName for i in Discounts" ng-change="updatePriceAfterDiscountApplied()">
+                    <select ng-model="selectedDiscount" ng-options=" i.discountName for i in Discounts" ng-change="updatePriceAfterDiscountApplied()" ng-disabled="!addOrderForm.$valid || successfulInsert">
                     </select>
 
             </div>
@@ -31,7 +35,7 @@
         <div class="col-6">
             <h2>Food Items</h2>
             <div class="row">
-                <button class="btn btn-success col-3" ng-repeat="item in Items" ng-click="addOrderToList(item)">{{item.itemName}}</button>
+                <button class="btn btn-success col-3" ng-repeat="item in Items" ng-click="addOrderToList(item)" ng-disabled="!addOrderForm.$valid || successfulInsert">{{item.itemName}}</button>
             </div>
         </div>
 
@@ -49,7 +53,7 @@
                         <td>{{i.Name}}</td>
                         <td>{{i.Price}}</td>
                         <td>
-                            <button class="btn btn-danger" ng-click="removeFromOrderToList(i)">
+                            <button class="btn btn-danger" ng-click="removeFromOrderToList(i) ng-disabled="!addOrderForm.$valid || successfulInsert"">
                                 Remove
                             </button>
                         </td>

@@ -8,9 +8,6 @@
 
             getData();
 
-
-
-
             function getData() {
                 dataService.getOrders().then(function (result) {
                     $scope.orders = result;
@@ -22,7 +19,7 @@
                             $scope.orders[i].timeOfOrder = formatedDate[i].timeOfOrder;
                         }
                     }
-                   
+
                 })
 
             };
@@ -38,8 +35,7 @@
             };
 
         }])
-
-        .controller('orderAddCtrl', ['$scope', '$location', 'dataService', function ($scope, $location, dataService) {
+        .controller('orderAddCtrl', ['$scope', '$location', 'dataService', '$http', function ($scope, $location, dataService, $http) {
 
             $scope.chosenItems = [];
             $scope.calcPriceBeforeDiscount = 0;
@@ -113,23 +109,26 @@
 
                 order.orderPrice = $scope.finalPrice.toFixed(2);
                 order.orderItems = myJson;
-                console.log(order.timeOfOrder);
-                dataService.addOrder(order).then(function () {
-                    $location.path('/');
-                });
+
+                $http.post('/Order/Create', order)
+                    .then(
+                        function success(response) {
+                            $scope.successfulInsert = true;
+                            console.log('status: ' + response.status);
+                            $scope.postSuccess = response.data;
+                            console.log($scope.postSuccess);
+                        },
+                        function error(response) {
+                            console.log('error, return status: ' + response.status);
+                            $scope.createStatus = 'insert error, ' + response.data.message;
+                        }
+                    );			
             };
 
-            getEverything();
-            function getEverything() {
-                getItems();
+            $scope.getEverything = function () {
+                $scope.getItems();
                 getDiscounts();
             }
-
-            function getItems() {
-                dataService.getItems().then(function (result) {
-                    $scope.Items = result;
-                });
-            };
 
             function getDiscounts() {
                 dataService.getDiscounts().then(function (result) {
@@ -137,12 +136,15 @@
                 });
             };
 
-            $scope.loginUser = function () {
-                console.log($scope.userId);
-                dataService.getUserById($scope.userId).then(function (result) {
-                    $scope.Items = result;
-                });
-            };
+            $scope.getItems = function () {
+                $http.get('/Order/GetItems')
+                    .then(function (response) {
+                        $scope.Items = response.data;
+                    }, function (response) {
+                        console.log('error http getItems: ' + response.status)
+                    });
+            }
+	       
         }]);
 
 })();

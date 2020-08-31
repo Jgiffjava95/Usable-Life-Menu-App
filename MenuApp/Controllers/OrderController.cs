@@ -10,6 +10,7 @@ namespace MenuApp.Controllers
 {
     public class OrderController : Controller
     {
+        private DateTime timeNow = DateTime.Now;
         private DBC db = null;
         public OrderController()
         {
@@ -45,12 +46,12 @@ namespace MenuApp.Controllers
         [HttpPost]
         public JsonResult Create(Order order)
         {
-
-            order.timeOfOrder = DateTime.Now;
+            string PostResponse = "Order was successfully added";
+            order.timeOfOrder = timeNow;
             //order.orderItems = JsonConvert.DeserializeObject<string>(order);
             db.Orders.Add(order);
             db.SaveChanges();
-            return Json(null);
+            return Json(PostResponse);
         }
         [HttpPut]
         public JsonResult Edit(Order order)
