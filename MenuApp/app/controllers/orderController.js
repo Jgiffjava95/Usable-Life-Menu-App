@@ -98,7 +98,7 @@
             };
 
             $scope.createOrder = function (order) {
-                console.log($scope.selectedDiscount.discountAmount);
+                console.log(order.customerName);
                 var itemList = [];
                 for (var i = 0; i < $scope.chosenItems.length;) {
                     console.log($scope.chosenItems[i].Name);
@@ -115,8 +115,7 @@
                         function success(response) {
                             $scope.successfulInsert = true;
                             console.log('status: ' + response.status);
-                            $scope.postSuccess = response.data;
-                            console.log($scope.postSuccess);
+                            $scope.postStatus = response.data;
                         },
                         function error(response) {
                             console.log('error, return status: ' + response.status);

@@ -1,4 +1,5 @@
 ﻿using MenuApp.Models;
+using MenuApp.Service;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,8 @@ namespace MenuApp.Controllers
 {
     public class OrderController : Controller
     {
+        private Validations validationsController = new Validations();
+        private Response OrderControllerResponder = new Response();
         private DateTime timeNow = DateTime.Now;
         private DBC db = null;
         public OrderController()
@@ -46,15 +49,22 @@ namespace MenuApp.Controllers
         [HttpPost]
         public JsonResult Create(Order order)
         {
-            string PostResponse = "Order was successfully added";
-            order.timeOfOrder = timeNow;
-            //order.orderItems = JsonConvert.DeserializeObject<string>(order);
-            db.Orders.Add(order);
-            db.SaveChanges();
-            return Json(PostResponse);
+            if (validationsController.validateCustomerNameLength(order.customerName) == true &&
+                validationsController.validateOrderItems(order.orderItems) == true &&
+                validationsController.validateOrderPrice(order.orderPrice) == true)
+            {
+                order.setDateTime(timeNow);
+                db.Orders.Add(order);
+                db.SaveChanges();
+                return Json(OrderControllerResponder.postStatusResponseSuccess());
+            } else
+            {
+                return Json(OrderControllerResponder.postStatusResponseFailed());
+            }
         }
+        /*
         [HttpPut]
-        public JsonResult Edit(Order order)
+       public JsonResult Edit(Order order)
         {
             db.Entry(order).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
@@ -68,5 +78,6 @@ namespace MenuApp.Controllers
             db.SaveChanges();
             return Json(null);
         }
-    }
+        */
+    }  
 }

@@ -18,13 +18,15 @@ namespace MenuApp.Models
         public string customerName { get; set; }
 
         [Required]
-       // public List<itemFromJson> orderItems { get; set; }
 
         public string orderItems { get; set; }
         public double orderPrice { get; set; }
         public DateTime timeOfOrder { get; set; }
 
-     //   public string employeeThatTookOrder { get; set; }
+        public void setDateTime(DateTime timeNow)
+        {
+            this.timeOfOrder = timeNow;
+        }
 
     }
 
