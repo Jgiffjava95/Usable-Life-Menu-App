@@ -11,10 +11,10 @@ namespace MenuApp.Controllers
 {
     public class OrderController : Controller
     {
+        private DBC db = null;
         private Validations validationsController = new Validations();
         private Response OrderControllerResponder = new Response();
         private DateTime timeNow = DateTime.Now;
-        private DBC db = null;
         public OrderController()
         {
             db = new DBC();
@@ -40,24 +40,17 @@ namespace MenuApp.Controllers
 
         }
 
-        public JsonResult GetUser(int userId)
-        {
-            var loggedInUser = db.User.Find(userId);
-            return Json(loggedInUser, JsonRequestBehavior.AllowGet);
-
-        }
         [HttpPost]
         public JsonResult Create(Order order)
         {
-            if (validationsController.validateCustomerNameLength(order.customerName) == true &&
-                validationsController.validateOrderItems(order.orderItems) == true &&
-                validationsController.validateOrderPrice(order.orderPrice) == true)
+            if (validationsController.validateWholeOrderAndRespond(order))
             {
                 order.setDateTime(timeNow);
                 db.Orders.Add(order);
                 db.SaveChanges();
                 return Json(OrderControllerResponder.postStatusResponseSuccess());
-            } else
+            }
+            else
             {
                 return Json(OrderControllerResponder.postStatusResponseFailed());
             }

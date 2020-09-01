@@ -9,8 +9,23 @@ namespace MenuApp.Service
 {
     public class Validations
     {
+
+        public bool validateWholeOrderAndRespond(Order order)
+        {
+
+            if (validateCustomerNameLength(order.customerName) == true &&
+                validateOrderItems(order.orderItems) == true &&
+                validateOrderPrice(order.orderPrice) == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
   
-        public bool validateCustomerNameLength(string customerName)
+        private static bool validateCustomerNameLength(string customerName)
         {
             if(customerName == null)
             {
@@ -24,7 +39,7 @@ namespace MenuApp.Service
             return false;
         }
 
-        public bool validateOrderItems(string orderItems)
+        private static bool validateOrderItems(string orderItems)
         {
             if (orderItems == "[]")
             {
@@ -37,7 +52,7 @@ namespace MenuApp.Service
             return false;
         }
 
-        public bool validateOrderPrice(double orderPrice)
+        private static bool validateOrderPrice(double orderPrice)
         {
             if (orderPrice <= 0)
             {
