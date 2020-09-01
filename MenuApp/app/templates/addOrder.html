@@ -17,7 +17,8 @@
             <div class="form-group">
                 <label class="control-label">Customer Name</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" ng-model="order.customerName"/>
+                    <input name="customerName" type="text" class="form-control" ng-model="order.customerName" required/>
+                    <span class="text-danger" ng-show="addOrderForm.customerName.$touched && addOrderForm.customerName.$invalid">Customer Name Required.</span>
                 </div>
             </div>
 
@@ -40,6 +41,7 @@
         </div>
 
         <div class="col-6">
+            <p class="text-danger">{{frontEndValidationText}}</p>
             <table class="table table-bordered">
                 <thead>
                     <tr>

@@ -47,6 +47,7 @@
             $scope.orderSavings = 0;
             $scope.arkansasSalesTaxAmount = 6.5;
             $scope.taxAmountForCurrentOrder = 0;
+            $scope.frontEndValidationText = "";
 
             $scope.addOrderToList = function (item) {
                 $scope.addPricesToTotalItemPrices(item.itemPrice);
@@ -98,30 +99,36 @@
             };
 
             $scope.createOrder = function (order) {
-                console.log(order.customerName);
+                $scope.frontEndValidationText = "";
                 var itemList = [];
+                console.log(itemList[0]);
                 for (var i = 0; i < $scope.chosenItems.length;) {
                     console.log($scope.chosenItems[i].Name);
                     itemList.push($scope.chosenItems[i].Name);
                     i++;
                 }
-                var myJson = JSON.stringify(itemList);
+                if (itemList[0] == null) {
+                    $scope.frontEndValidationText = "Order must contain at least one item.";
+                } else {
 
-                order.orderPrice = $scope.finalPrice.toFixed(2);
-                order.orderItems = myJson;
+                    var myJson = JSON.stringify(itemList);
 
-                $http.post('/Order/Create', order)
-                    .then(
-                        function success(response) {
-                            $scope.successfulInsert = true;
-                            console.log('status: ' + response.status);
-                            $scope.postStatus = response.data;
-                        },
-                        function error(response) {
-                            console.log('error, return status: ' + response.status);
-                            $scope.createStatus = 'insert error, ' + response.data.message;
-                        }
-                    );			
+                    order.orderPrice = $scope.finalPrice.toFixed(2);
+                    order.orderItems = myJson;
+
+                    $http.post('/Order/Create', order)
+                        .then(
+                            function success(response) {
+                                $scope.successfulInsert = true;
+                                console.log('status: ' + response.status);
+                                $scope.postStatus = response.data;
+                            },
+                            function error(response) {
+                                console.log('error, return status: ' + response.status);
+                                $scope.createStatus = 'insert error, ' + response.data.message;
+                            }
+                        );
+                }
             };
 
             $scope.getEverything = function () {
@@ -143,7 +150,7 @@
                         console.log('error http getItems: ' + response.status)
                     });
             }
-	       
+
         }]);
 
 })();
