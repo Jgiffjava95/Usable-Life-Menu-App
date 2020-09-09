@@ -187,6 +187,7 @@
     <Content Include="app\assets\White-black checkered background for design-works Vector Image_files\white-black-checkered-background-for-design-works-vector-21665258%281%29.jpg" />
     <Content Include="app\assets\White-black checkered background for design-works Vector Image_files\white-black-checkered-background-for-design-works-vector-21665258.jpg" />
     <Content Include="app\controllers\orderController.js" />
+    <Content Include="app\controllers\reformat.js" />
     <Content Include="app\css\StyleSheet1.css" />
     <Content Include="app\shared\dataService.js" />
     <Content Include="app\templates\addOrder.html" />

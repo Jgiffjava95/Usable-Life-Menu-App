@@ -48,6 +48,9 @@
             $scope.arkansasSalesTaxAmount = 6.5;
             $scope.taxAmountForCurrentOrder = 0;
             $scope.frontEndValidationText = "";
+            $scope.mainItems = [];
+            $scope.sideItems = [];
+            $scope.drinkItems = [];
 
             $scope.addOrderToList = function (item) {
                 $scope.addPricesToTotalItemPrices(item.itemPrice);
@@ -109,6 +112,8 @@
                 }
                 if (itemList[0] == null) {
                     $scope.frontEndValidationText = "Order must contain at least one item.";
+
+              
                 } else {
 
                     var myJson = JSON.stringify(itemList);
@@ -146,9 +151,24 @@
                 $http.get('/Order/GetItems')
                     .then(function (response) {
                         $scope.Items = response.data;
+                        $scope.organizeItemsByType($scope.Items);
                     }, function (response) {
                         console.log('error http getItems: ' + response.status)
                     });
+            };
+
+            $scope.organizeItemsByType = function (items) {
+                for (var i = 0; i < items.length; i++) {
+                    console.log("Item name:" + items[i].itemName + "Item type:" + items[i].itemType);
+                    if (items[i].itemType == "Main") {
+                        $scope.mainItems.push(items[i]);
+                    } else if (items[i].itemType == "Side") {
+                        $scope.sideItems.push(items[i]);
+                    } else if (items[i].itemType == "Drink") {
+                        $scope.drinkItems.push(items[i]);
+                    }
+
+                }
             }
 
         }]);

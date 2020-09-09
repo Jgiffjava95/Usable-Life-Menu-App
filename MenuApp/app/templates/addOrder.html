@@ -17,7 +17,7 @@
             <div class="form-group">
                 <label class="control-label">Customer Name</label>
                 <div class="col-lg-10">
-                    <input name="customerName" type="text" class="form-control" ng-model="order.customerName" required/>
+                    <input name="customerName" maxlength="20" type="text" class="form-control" ng-model="order.customerName" required />
                     <span class="text-danger" ng-show="addOrderForm.customerName.$touched && addOrderForm.customerName.$invalid">Customer Name Required.</span>
                 </div>
             </div>
@@ -35,8 +35,17 @@
     <div class="row">
         <div class="col-6">
             <h2>Food Items</h2>
+            <h4>Mains</h4>
             <div class="row">
-                <button class="btn btn-success col-3" ng-repeat="item in Items" ng-click="addOrderToList(item)">{{item.itemName}}</button>
+                <button class="btn btn-success col-3" ng-repeat="item in mainItems" ng-click="addOrderToList(item)">{{item.itemName}}</button>
+            </div>
+            <h4>Sides</h4>
+            <div class="row">
+                <button class="btn btn-success col-3" ng-repeat="item in sideItems" ng-click="addOrderToList(item)">{{item.itemName}}</button>
+            </div>
+            <h4>Drinks</h4>
+            <div class="row">
+                <button class="btn btn-success col-3" ng-repeat="item in drinkItems" ng-click="addOrderToList(item)">{{item.itemName}}</button>
             </div>
         </div>
 

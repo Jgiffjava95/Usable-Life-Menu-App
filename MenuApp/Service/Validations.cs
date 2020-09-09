@@ -7,10 +7,10 @@ using System.Web;
 
 namespace MenuApp.Service
 {
-    public class Validations
+    public static class Validations
     {
 
-        public bool validateWholeOrderAndRespond(Order order)
+        public static bool validateWholeOrderAndRespond(Order order)
         {
 
             if (validateCustomerNameLength(order.customerName) == true &&
@@ -30,7 +30,7 @@ namespace MenuApp.Service
             if(customerName == null)
             {
 
-            } else if (customerName.Length > 32) {
+            } else if (customerName.Length > 20) {
 
             } else
             {

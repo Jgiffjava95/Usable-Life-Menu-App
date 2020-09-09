@@ -12,7 +12,6 @@ namespace MenuApp.Controllers
     public class OrderController : Controller
     {
         private DBC db = null;
-        private Validations validationsController = new Validations();
         private Response OrderControllerResponder = new Response();
         private DateTime timeNow = DateTime.Now;
         public OrderController()
@@ -43,7 +42,7 @@ namespace MenuApp.Controllers
         [HttpPost]
         public JsonResult Create(Order order)
         {
-            if (validationsController.validateWholeOrderAndRespond(order))
+            if (Validations.validateWholeOrderAndRespond(order))
             {
                 order.setDateTime(timeNow);
                 db.Orders.Add(order);
