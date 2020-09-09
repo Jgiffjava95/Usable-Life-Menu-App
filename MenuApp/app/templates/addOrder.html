@@ -37,15 +37,27 @@
             <h2>Food Items</h2>
             <h4>Mains</h4>
             <div class="row">
-                <button class="btn btn-success col-3" ng-repeat="item in mainItems" ng-click="addOrderToList(item)">{{item.itemName}}</button>
+                <button class="btn btn-success col-3" ng-repeat="item in mainItems" ng-click="addOrderToList(item)">
+                    {{item.itemName}} 
+                    <br />
+                    {{item.itemPrice}}
+                </button>
             </div>
             <h4>Sides</h4>
             <div class="row">
-                <button class="btn btn-success col-3" ng-repeat="item in sideItems" ng-click="addOrderToList(item)">{{item.itemName}}</button>
+                <button class="btn btn-success col-3" ng-repeat="item in sideItems" ng-click="addOrderToList(item)">
+                    {{item.itemName}}
+                    <br />
+                    {{item.itemPrice}}
+                </button>
             </div>
             <h4>Drinks</h4>
             <div class="row">
-                <button class="btn btn-success col-3" ng-repeat="item in drinkItems" ng-click="addOrderToList(item)">{{item.itemName}}</button>
+                <button class="btn btn-success col-3" ng-repeat="item in drinkItems" ng-click="addOrderToList(item)">
+                    {{item.itemName}}
+                    <br />
+                    {{item.itemPrice}}
+                </button>
             </div>
         </div>
 
