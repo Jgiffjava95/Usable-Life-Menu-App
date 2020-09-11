@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace MenuApp.Controllers
 {
@@ -27,7 +28,7 @@ namespace MenuApp.Controllers
 
         public JsonResult GetItems()
         {
-            var items = db.Items.ToList();
+            var items = db.Items.Include(x => x.itemType).ToList();
             return Json(items, JsonRequestBehavior.AllowGet);
 
         }

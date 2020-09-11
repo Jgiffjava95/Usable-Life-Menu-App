@@ -151,6 +151,9 @@
                 $http.get('/Order/GetItems')
                     .then(function (response) {
                         $scope.Items = response.data;
+                        for (var i = 0; i < $scope.Items.length; i++) {
+                            console.log($scope.Items[i]);
+                        }
                         $scope.organizeItemsByType($scope.Items);
                     }, function (response) {
                         console.log('error http getItems: ' + response.status)
@@ -159,12 +162,12 @@
 
             $scope.organizeItemsByType = function (items) {
                 for (var i = 0; i < items.length; i++) {
-                    console.log("Item name:" + items[i].itemName + "Item type:" + items[i].itemType);
-                    if (items[i].itemType == "Main") {
+                    console.log("Item name:" + items[i].itemName + "Item type:" + items[i].itemType.typeName);
+                    if (items[i].itemType.typeName == "Main") {
                         $scope.mainItems.push(items[i]);
-                    } else if (items[i].itemType == "Side") {
+                    } else if (items[i].itemType.typeName == "Side") {
                         $scope.sideItems.push(items[i]);
-                    } else if (items[i].itemType == "Drink") {
+                    } else if (items[i].itemType.typeName == "Drink") {
                         $scope.drinkItems.push(items[i]);
                     }
 

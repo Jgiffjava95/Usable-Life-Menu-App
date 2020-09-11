@@ -27,6 +27,8 @@ namespace MenuApp.Models
         public DbSet<Item> Items { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<Discount> Discount { get; set; }
-        // public DbSet<itemFromJson> itemFromJson { get; set; }
+        public DbSet<ItemTypes> ItemTypes { get; set; }
+
+
     }
 }

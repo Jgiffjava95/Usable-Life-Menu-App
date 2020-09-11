@@ -140,6 +140,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entity Framework\Discount.cs" />
+    <Compile Include="Models\Entity Framework\ItemTypes.cs" />
     <Compile Include="Models\Entity Framework\Order.cs" />
     <Compile Include="Models\Entity Framework\DBC.cs" />
     <Compile Include="Models\Entity Framework\Item.cs" />
