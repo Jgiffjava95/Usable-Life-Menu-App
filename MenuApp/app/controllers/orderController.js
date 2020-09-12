@@ -122,7 +122,7 @@
                     var myJson = JSON.stringify(itemList);
 
                     order.orderPrice = $scope.finalPrice.toFixed(2);
-                    order.itemDiscountId = $scope.selectedDiscount.discountId;
+                    order.itemDiscountId = $scope.selectedDiscount;
                     order.orderItems = myJson;
                     console.log(order);
 
