@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MenuApp.Models.Entity_Framework
 {
     public class Discount {
         [Key]
+        public int discountId { get; set; }
         public string discountName { get; set; }
         public int discountAmount { get; set; }
     }

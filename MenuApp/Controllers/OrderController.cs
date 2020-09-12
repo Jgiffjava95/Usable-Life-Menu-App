@@ -1,10 +1,7 @@
 ﻿using MenuApp.Models;
 using MenuApp.Service;
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 
@@ -21,7 +18,7 @@ namespace MenuApp.Controllers
         }
         public JsonResult Index()
         {
-            var orders = db.Orders.ToList();
+            var orders = db.Orders.Include(x => x.itemDiscountId).ToList(); ;
             return Json(orders, JsonRequestBehavior.AllowGet);
             
         }

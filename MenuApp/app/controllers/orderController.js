@@ -71,6 +71,8 @@
             $scope.calculateFinalPrice = function (total) {
                 if ($scope.selectedDiscount == "") {
                     $scope.selectedDiscount = { 'discountAmount': 0 };
+                    $scope.selectedDiscount = { 'discountName': "No Discount" };
+                    $scope.selectedDiscount = { 'discountId': 3 };
                 }
                 var calcDiscountPrice = (total * $scope.selectedDiscount.discountAmount) / 100;
                 var finalBeforeTaxAdded = total - calcDiscountPrice;
@@ -86,6 +88,7 @@
 
             $scope.updatePriceAfterDiscountApplied = function () {
                 $scope.calculateFinalPrice($scope.calcPriceBeforeDiscount);
+                console.log($scope.selectedDiscount);
             }
 
             $scope.removeFromOrderToList = function (item) {
@@ -119,7 +122,9 @@
                     var myJson = JSON.stringify(itemList);
 
                     order.orderPrice = $scope.finalPrice.toFixed(2);
+                    order.itemDiscountId = $scope.selectedDiscount.discountId;
                     order.orderItems = myJson;
+                    console.log(order);
 
                     $http.post('/Order/Create', order)
                         .then(
@@ -144,6 +149,9 @@
             function getDiscounts() {
                 dataService.getDiscounts().then(function (result) {
                     $scope.Discounts = result;
+                    for (var i = 0; i < $scope.Discounts.length; i++) {
+                        console.log($scope.Discounts[i]);
+                    }
                 });
             };
 

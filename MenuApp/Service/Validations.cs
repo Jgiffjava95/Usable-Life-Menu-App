@@ -54,7 +54,7 @@ namespace MenuApp.Service
 
         private static bool validateOrderPrice(double orderPrice)
         {
-            if (orderPrice <= 0)
+            if (orderPrice < 0)
             {
 
             }

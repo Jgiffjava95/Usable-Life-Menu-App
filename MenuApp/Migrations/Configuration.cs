@@ -10,7 +10,6 @@
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            ContextKey = "MenuApp.Models.DBC";
         }
 
         protected override void Seed(MenuApp.Models.DBC context)

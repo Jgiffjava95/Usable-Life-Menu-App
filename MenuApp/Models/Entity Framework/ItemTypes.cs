@@ -9,6 +9,7 @@ namespace MenuApp.Models.Entity_Framework
     public class ItemTypes
     {
         [Key]
+        public int typeId { get; set; }
         public string typeName { get; set; }
     }
 }

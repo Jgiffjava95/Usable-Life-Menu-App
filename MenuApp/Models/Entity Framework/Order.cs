@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MenuApp.Models.Entity_Framework;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
+
 
 namespace MenuApp.Models
 {
@@ -21,6 +20,7 @@ namespace MenuApp.Models
 
         public string orderItems { get; set; }
         public double orderPrice { get; set; }
+        public Discount itemDiscountId { get; set; }
         public DateTime timeOfOrder { get; set; }
 
         public void setDateTime(DateTime timeNow)
