@@ -71,9 +71,7 @@
 
             $scope.checkDiscountStatus = function () {
                 if ($scope.selectedDiscount == "") {
-                    $scope.selectedDiscount.discountAmount =  0;
-                    $scope.selectedDiscount.discountName = "No Discount";
-                    $scope.selectedDiscount.discoundId = 3;
+                    $scope.selectedDiscount = { 'discountAmount': 0, 'discountName': "No Discount", 'discountId': 3 };
                 }
             }
 
