@@ -11,7 +11,7 @@ namespace MenuApp.Models
         public int itemId { get; set; }
         public string itemName { get; set; }
         public double itemPrice { get; set; }
-        public ItemTypes itemType { get; set; }
+        public ItemTypes typeId { get; set; }
 
 
     }

@@ -20,7 +20,7 @@ namespace MenuApp.Models
 
         public string orderItems { get; set; }
         public double orderPrice { get; set; }
-        public Discount itemDiscountId { get; set; }
+        public Discount discountId { get; set; }
         public DateTime timeOfOrder { get; set; }
 
         public void setDateTime(DateTime timeNow)

@@ -60,6 +60,7 @@
 
             $scope.addPricesToTotalItemPrices = function (price) {
                 $scope.calcPriceBeforeDiscount += price;
+                console.log($scope.calcPriceBeforeDiscount);
                 $scope.calculateFinalPrice($scope.calcPriceBeforeDiscount);
             };
 
@@ -68,27 +69,35 @@
                 $scope.calculateFinalPrice($scope.calcPriceBeforeDiscount);
             };
 
-            $scope.calculateFinalPrice = function (total) {
+            $scope.checkDiscountStatus = function () {
                 if ($scope.selectedDiscount == "") {
-                    $scope.selectedDiscount = { 'discountAmount': 0 };
-                    $scope.selectedDiscount = { 'discountName': "No Discount" };
-                    $scope.selectedDiscount = { 'discountId': 3 };
+                    $scope.selectedDiscount.discountAmount =  0;
+                    $scope.selectedDiscount.discountName = "No Discount";
+                    $scope.selectedDiscount.discoundId = 3;
                 }
-                var calcDiscountPrice = (total * $scope.selectedDiscount.discountAmount) / 100;
-                var finalBeforeTaxAdded = total - calcDiscountPrice;
+            }
 
-                var calcSalesTax = (finalBeforeTaxAdded * $scope.arkansasSalesTaxAmount) / 100;
+            $scope.calculateFinalPrice = function (total) {
 
-                $scope.orderSavings = calcDiscountPrice;
-
-                $scope.taxAmountForCurrentOrder = calcSalesTax;
-
-                $scope.finalPrice = total - calcDiscountPrice + $scope.taxAmountForCurrentOrder;
+                $scope.checkDiscountStatus();
+                console.log("selectedDiscount" + " " + $scope.selectedDiscount.discountName);
+                    console.log("total" + total);
+                    var calcDiscountPrice = (total * $scope.selectedDiscount.discountAmount) / 100;
+                    console.log("calcDiscountPrice" + calcDiscountPrice);
+                    var finalBeforeTaxAdded = total - calcDiscountPrice;
+                    console.log("finalBeforeTaxAdded" + finalBeforeTaxAdded);
+                    var calcSalesTax = (finalBeforeTaxAdded * $scope.arkansasSalesTaxAmount) / 100;
+                    console.log("calcSalesTax" + calcSalesTax);
+                    $scope.orderSavings = calcDiscountPrice;
+                    console.log("orderSavings" + $scope.orderSavings);
+                    $scope.taxAmountForCurrentOrder = calcSalesTax;
+                    console.log("taxAmountForCurrentOrder" + $scope.taxAmountForCurrentOrder);
+                    $scope.finalPrice = total - calcDiscountPrice + $scope.taxAmountForCurrentOrder;
+                    console.log("final price" + $scope.finalPrice);
             };
 
             $scope.updatePriceAfterDiscountApplied = function () {
                 $scope.calculateFinalPrice($scope.calcPriceBeforeDiscount);
-                console.log($scope.selectedDiscount);
             }
 
             $scope.removeFromOrderToList = function (item) {
@@ -107,7 +116,6 @@
             $scope.createOrder = function (order) {
                 $scope.frontEndValidationText = "";
                 var itemList = [];
-                console.log(itemList[0]);
                 for (var i = 0; i < $scope.chosenItems.length;) {
                     console.log($scope.chosenItems[i].Name);
                     itemList.push($scope.chosenItems[i].Name);
@@ -120,6 +128,9 @@
                 } else {
 
                     var myJson = JSON.stringify(itemList);
+
+                    $scope.checkDiscountStatus();
+                    console.log($scope.selectedDiscount);
 
                     order.orderPrice = $scope.finalPrice.toFixed(2);
                     order.itemDiscountId = $scope.selectedDiscount;
@@ -160,7 +171,7 @@
                     .then(function (response) {
                         $scope.Items = response.data;
                         for (var i = 0; i < $scope.Items.length; i++) {
-                            console.log($scope.Items[i]);
+                            console.log($scope.Items[i].typeId);
                         }
                         $scope.organizeItemsByType($scope.Items);
                     }, function (response) {
@@ -170,12 +181,12 @@
 
             $scope.organizeItemsByType = function (items) {
                 for (var i = 0; i < items.length; i++) {
-                    console.log("Item name:" + items[i].itemName + "Item type:" + items[i].itemType.typeName);
-                    if (items[i].itemType.typeName == "Main") {
+                    console.log("Item name:" + items[i].itemName + "Item type:" + items[i].typeId.typeName);
+                    if (items[i].typeId.typeName == "Main") {
                         $scope.mainItems.push(items[i]);
-                    } else if (items[i].itemType.typeName == "Side") {
+                    } else if (items[i].typeId.typeName == "Side") {
                         $scope.sideItems.push(items[i]);
-                    } else if (items[i].itemType.typeName == "Drink") {
+                    } else if (items[i].typeId.typeName == "Drink") {
                         $scope.drinkItems.push(items[i]);
                     }
 

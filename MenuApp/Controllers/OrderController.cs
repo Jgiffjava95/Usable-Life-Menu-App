@@ -18,14 +18,14 @@ namespace MenuApp.Controllers
         }
         public JsonResult Index()
         {
-            var orders = db.Orders.Include(x => x.itemDiscountId).ToList(); ;
+            var orders = db.Orders.Include(x => x.discountId).ToList(); ;
             return Json(orders, JsonRequestBehavior.AllowGet);
             
         }
 
         public JsonResult GetItems()
         {
-            var items = db.Items.Include(x => x.itemType).ToList();
+            var items = db.Items.Include(x => x.typeId).ToList();
             return Json(items, JsonRequestBehavior.AllowGet);
 
         }
